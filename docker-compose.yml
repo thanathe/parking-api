@@ -1,0 +1,36 @@
+version: "3.9"
+services:
+    parking-api:
+        build: .
+        ports:
+            - 8000:8000
+        depends_on: 
+            - db
+        environment: 
+            MYSQLHOST: db
+            MYSQLUSER: admin
+            MYSQLPASSWORD: 123456
+            MYSQLDATABASE: parkingdb
+    db:
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment:
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: 123456
+            MYSQL_DATABASE: parkingdb
+            MYSQL_ROOT_PASSWORD: 123456
+        ports:
+            - 3306:3306
+        volumes:
+            - parkingdata:/var/lib/mysql/
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        restart: always
+        ports:
+            - 8080:80
+        environment:
+            PMA_ARBITRARY: 1
+            MYSQL_ROOT_PASSWORD: 123456
+volumes:
+    parkingdata:

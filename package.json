@@ -1,0 +1,31 @@
+{
+  "name": "parking-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "IPADDR=0.0.0.0 node server.js",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thanathe/parking-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thanathe/parking-api/issues"
+  },
+  "homepage": "https://github.com/thanathe/parking-api#readme",
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-path": "^0.3.8",
+    "lodash": "^4.17.21",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "sequelize": "^6.6.2"
+  }
+}
