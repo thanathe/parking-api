@@ -25,10 +25,20 @@ const parkCar = async (req, res) => {
     const slot = await libParking.parkCar(car_size, plate_number)
     if (!slot) {
         return res.json({result: 1, msg: "parking slot full"})
+    } else if (slot.status === 'already_parked') {
+        return res.json({
+            result: 0, 
+            status: 'already_parked', 
+            data: {
+                id: slot.id, 
+                plate_number: slot.plate_number
+            }
+        })
+    } else {
+        slot.plate_number = plate_number
+        return res.json({result: 0, data: slot});
     }
-    slot.plate_number = plate_number
-    return res.json({slot: slot});
-
+    
 }
 
 const leaveSlot = async (req, res) => {
