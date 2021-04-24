@@ -4,11 +4,16 @@
 const libParking = require('../../lib/v1/parking')
 const _ = require('lodash')
 
-const createParkingLot = (req, res) => {
+const createParkingLot = async (req, res) => {
     // สร้างช่องจอด 
     const { size, num_of_slot } = req.body;
-    const parkingLot = libParking.createParkingLot(size, num_of_slot)
-    return res.json(parkingLot)
+    const parkingLot = await libParking.createParkingLot(size, num_of_slot)
+    if (parkingLot) {
+        return res.json({result: 0, data: 'create parking lot success'})
+    } else {
+        return res.json({result: 1, msg: 'create parking lot fail'})
+    }
+    
 }
 
 const parkCar = async (req, res) => {
@@ -60,9 +65,9 @@ const getPlateNumber = async (req, res) => {
     
 }
 
-const getSlotAvailableByCarSize = async (req, res) => {
+const getSlotAllocatedByCarSize = async (req, res) => {
     const { car_size } = req.body;
-    const slots = await libParking.getSlotAvailableByCarSize(car_size)
+    const slots = await libParking.getSlotAllocatedByCarSize(car_size)
     res.json({result: 0, data: {slots: slots}})
 }
 
@@ -74,7 +79,7 @@ const parkingStatus = async (req, res) => {
 
 module.exports = {
     getPlateNumber,
-    getSlotAvailableByCarSize,
+    getSlotAllocatedByCarSize,
     parkingStatus,
     createParkingLot,
     parkCar,
