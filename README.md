@@ -8,6 +8,10 @@ username: admin
 password: 123456
 database: parkingdb
 ```
+### Setup Database 
+```
+import sql-files/parking-slot.sql
+```
 ### Docker setup
 ```
 docker-compose up -d
