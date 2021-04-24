@@ -7,6 +7,7 @@ var expressPath = require('express-path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var cors = require('cors');
+require('dotenv').config()
 var libMySQL = require('./lib/v1/mysql-db')
 var onResponseEnd = require('./middlewares/response-end').onResponseEnd;
 
@@ -73,7 +74,6 @@ var setupRoute = function (app, routePath, routeMap, middlewares) {
 };
 
 // Routes configuration
-
 // Main API
 setupRoute(app, '/v1', './api/v1/routes', cors());
 
