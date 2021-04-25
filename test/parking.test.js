@@ -1,5 +1,6 @@
 const parkingLot = require('../lib/v1/parking')
 const libMySQL = require('../lib/v1/mysql-db')
+require('dotenv').config()
 libMySQL.connect();
 
 test('create parking lot', async () => {
@@ -17,14 +18,12 @@ test('create parking lot', async () => {
 test('park the car', async () => {
     expect.assertions(2)
     const result = await parkingLot.parkCar('M', 'MM-9999')
-    // console.log(result);
-    expect(result).toHaveProperty('id')
+    expect(result).toHaveProperty('slot_number')
     expect(result).toHaveProperty('slot_size')
 })
 
 test('leave slot', async () => {
     const result = await parkingLot.leaveSlot('MM-9999')
-    console.log(result);
     expect(result).toBe(true)
 })
 
@@ -33,9 +32,9 @@ test('parking lot status', async () => {
     expect.assertions(4)
     const result = await parkingLot.parkingStatus()
     expect(Array.isArray(result)).toBe(true)
-    expect(result[0]).toHaveProperty('id')
+    expect(result[0]).toHaveProperty('slot_number')
     expect(result[0]).toHaveProperty('slot_size')
-    expect(result[0]).toHaveProperty('plate_number')
+    expect(result[0]).toHaveProperty('is_available')
 })
 
 test('get slot allocated by car size', async () => {
