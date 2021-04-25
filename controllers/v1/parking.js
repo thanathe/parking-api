@@ -13,7 +13,6 @@ const createParkingLot = async (req, res) => {
     } else {
         return res.json({result: 1, msg: 'create parking lot fail'})
     }
-    
 }
 
 const parkCar = async (req, res) => {
@@ -30,7 +29,8 @@ const parkCar = async (req, res) => {
             result: 0, 
             status: 'already_parked', 
             data: {
-                id: slot.id, 
+                // id: slot.id, 
+                slot_number: slot.slot_number,
                 plate_number: slot.plate_number
             }
         })
