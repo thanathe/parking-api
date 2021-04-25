@@ -9,7 +9,7 @@ const createParkingLot = async (req, res) => {
     const { size, num_of_slot } = req.body;
     const parkingLot = await libParking.createParkingLot(size, num_of_slot)
     if (parkingLot) {
-        return res.json({result: 0, data: 'create parking lot success'})
+        return res.json({result: 0, msg: 'create parking lot success'})
     } else {
         return res.json({result: 1, msg: 'create parking lot fail'})
     }
@@ -29,7 +29,7 @@ const parkCar = async (req, res) => {
             result: 0, 
             status: 'already_parked', 
             data: {
-                // id: slot.id, 
+                slot_size: slot.slot_size, 
                 slot_number: slot.slot_number,
                 plate_number: slot.plate_number
             }
@@ -78,7 +78,7 @@ const getPlateNumber = async (req, res) => {
 const getSlotAllocatedByCarSize = async (req, res) => {
     const { car_size } = req.body;
     const slots = await libParking.getSlotAllocatedByCarSize(car_size)
-    res.json({result: 0, data: {slots: slots}})
+    res.json({result: 0, data: slots})
 }
 
 const parkingStatus = async (req, res) => {
